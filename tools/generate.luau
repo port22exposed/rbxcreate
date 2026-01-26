@@ -59,4 +59,5 @@ fs.writeFile(
 		:gsub("--LOOKUP_TABLE_TYPE", lookupTableType)
 		:gsub("--CLASS_NAMES_UNION_TYPE", classNamesUnionType)
 		:gsub("--!nocheck\n", "")
+		:gsub("--LICENSE", `--\[[\n\t{fs.readFile("./LICENSE"):gsub("\n", "\n\t"):gsub("\n\t$", "\n")}]]\n`)
 )
