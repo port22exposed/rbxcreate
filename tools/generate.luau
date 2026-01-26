@@ -11,14 +11,14 @@ for _, name in db:GetClassNames() do
 	end
 end
 
-local previousCreatableInstanceCount = tonumber(fs.readFile("../creatable-instance-count"))
+local previousCreatableInstanceCount = tonumber(fs.readFile("./creatable-instance-count"))
 
 if previousCreatableInstanceCount == #creatable then
 	-- no changes in creatable instances
 	return
 end
 
-fs.writeFile("../creatable-instance-count", tostring(#creatable))
+fs.writeFile("./creatable-instance-count", tostring(#creatable))
 
 local function lines(items, fmt)
 	local tmp = {}
