@@ -4,8 +4,6 @@ local fs = require("@lune/fs")
 
 local API_DUMP_URL = "https://raw.githubusercontent.com/MaximumADHD/Roblox-Client-Tracker/roblox/API-Dump.json"
 
--- local db = roblox.getReflectionDatabase()
-
 local apiDumpResponse = net.request(API_DUMP_URL)
 
 if not apiDumpResponse.ok then
