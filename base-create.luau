@@ -1,3 +1,4 @@
+--LICENSE
 --!nocheck
 --LOOKUP_TABLE_TYPE
 
