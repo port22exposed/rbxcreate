@@ -410,10 +410,36 @@ type function Properties(instance: type?)
 	return properties
 end
 
-return function<T>(className: T & ClassNames)
+return function<T>(className: T & ClassNames, defaultParent: Instance?)
 	type class = index<Lookup, T>
-
 	return function(properties: Properties<class>)
-		return Instance.new(className :: any) :: class
+		local parent = defaultParent or nil
+		local instance = Instance.new(className)
+
+		for name, value in pairs(properties) do
+			if typeof(name) ~= "string" then
+				continue
+			end
+
+			if name == "Parent" then
+				parent = value
+			elseif name == "Children" and typeof(value) == "table" then
+				for _, child in value do
+					if typeof(child) == "Instance" then
+						child.Parent = instance
+					end
+				end
+			else
+				if typeof(instance[name]) == "RBXScriptSignal" then
+					instance[name]:Connect(value)
+				else
+					instance[name] = value
+				end
+			end
+		end
+
+		instance.Parent = parent :: Instance?
+
+		return instance :: class
 	end
 end
