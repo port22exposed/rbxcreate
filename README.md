@@ -1,6 +1,6 @@
 # rbxcreate
 
-@rbxts/make in pure Luau with strict typings.
+A library providing sugar for declaring Instances in Roblox with strict Luau typings.
 
 ## Source Conditions
 
