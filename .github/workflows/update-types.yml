@@ -1,4 +1,4 @@
-name: Update Roblox Types Weekly
+name: Update Roblox Types
 
 on:
   workflow_dispatch:
