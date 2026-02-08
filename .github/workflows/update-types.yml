@@ -3,7 +3,7 @@ name: Update Roblox Types
 on:
   workflow_dispatch:
   schedule:
-  - cron: "17 3 * * 2"
+    - cron: "17 4 * * 4"
 
 permissions:
   contents: write
