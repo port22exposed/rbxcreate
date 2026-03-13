@@ -25,7 +25,8 @@ jobs:
 
       - name: Run generator
         run: |
-          nix develop -c lune run ./tools/generate.luau
+          cd tooling
+          nix run .
 
       - name: Check for changes
         id: verify-changed-files
