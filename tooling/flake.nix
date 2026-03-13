@@ -1,10 +1,12 @@
 {
+  description = "Rust Project Template";
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
 
   outputs =
-    { nixpkgs, ... }:
+    { self, nixpkgs }:
     let
       forAllSystems =
         function:
@@ -13,9 +15,9 @@
         );
     in
     {
-      packages = forAllSystems (pkgs: rec {
-        kitamin = pkgs.callPackage ./default.nix { };
-        default = kitamin;
+      packages = forAllSystems (pkgs: {
+        generator = pkgs.callPackage ./default.nix { };
+        default = self.packages.${pkgs.stdenv.hostPlatform.system}.generator;
       });
 
       devShells = forAllSystems (pkgs: {
