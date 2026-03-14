@@ -7,12 +7,6 @@ use xxhash_rust::xxh3::xxh3_128;
 const API_DUMP_URL: &str =
     "https://raw.githubusercontent.com/MaximumADHD/Roblox-Client-Tracker/roblox/API-Dump.json";
 
-const PROJECT_ROOT: &str = "..";
-
-fn project_path(relative: &str) -> String {
-    format!("{}/{}", PROJECT_ROOT, relative)
-}
-
 fn main() {
     println!("fetching API dump...");
 
@@ -39,7 +33,7 @@ fn main() {
 
     println!("creatable instance list collected from API dump");
 
-    let hash_path = project_path("creatable-instance-hash");
+    let hash_path = "../creatable-instance-hash";
 
     let joined = creatable.join(",");
 
@@ -69,10 +63,10 @@ fn main() {
         format!("type ClassNames = {}", quoted.join(" | "))
     };
 
-    let base_create = fs::read_to_string(project_path("base-create.luau"))
-        .expect("failed to read base-create.luau");
+    let base_create =
+        fs::read_to_string("../create.luau.in").expect("failed to read create.luau.in");
 
-    let license = fs::read_to_string(project_path("LICENSE")).expect("failed to read LICENSE");
+    let license = fs::read_to_string("../LICENSE").expect("failed to read LICENSE");
 
     let license_indented = license.trim_end().replace('\n', "\n\t");
     let license_block = format!("--[[\n\t{}\n]]\n", license_indented);
@@ -83,7 +77,7 @@ fn main() {
         .replace("--!nocheck\n", "")
         .replace("--LICENSE", &license_block);
 
-    fs::write(project_path("create.luau"), &output).expect("failed to write create.luau");
+    fs::write("../create.luau", &output).expect("failed to write create.luau");
 
     println!(
         "wrote create.luau ({} creatable classes, hash: {})",
