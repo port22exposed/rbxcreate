@@ -14,8 +14,10 @@ fn main() {
         .call()
         .expect("failed to fetch API dump");
 
-    let api_dump: types::ApiDump =
-        serde_json::from_reader(response.body_mut().as_reader()).expect("failed to parse API dump");
+    let api_dump: types::ApiDump = response
+        .body_mut()
+        .read_json()
+        .expect("failed to parse API dump");
 
     println!("API dump parsed");
 
